@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h3 style="margin-top: 0;">Transaction List</h3>
+      <div id="transaction-list"></div> <!-- Only this gets replaced by JS -->
+    </div>
+
+    <div class="main">
+      <h2 style="padding:15px 15px 15px 0px; font-weight: bold;">Expense Report</h2>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; max-width:600px;">
+        <h3><span>Balance: </span><span id="balance">$0.00</span></h3>
+        <h4 id="saving-balance" class="hidden">Saving Balance: <span>$0.00</span></h4>
+      </div>
+
+      <div style="max-width:600px;">
+        <h4>Income: <span id="income">0</span></h4>
+        <h4>Expense: <span id="expense">0</span></h4>
+      </div>
+
+      <form id="form">
+        <select id="type" required>
+          <option value="" disabled selected>Select Type</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+
+        <select id="category" disabled required>
+          <option value="">Select type first</option>
+        </select>
+      
+        <input type="month" id="month" required>
+
+        <select id="currency">
+          <option value="USD">$ USD</option>
+          <option value="BRL">R$ BRL</option>
+          <option value="HUF">Ft HUF</option>
+          <option value="EUR">€ EUR</option>
+        </select>
+
+        <input type="number" id="amount" required placeholder="Amount" min="0" step="0.01">
+
+        <button type="submit">Add</button>
+        
+      </form>
+
+      <!-- Saving Target Section -->
+      <div style="margin-top: 10px; max-width:600px;">
+        <label>
+          <input type="checkbox" id="enable-saving"> Enable Saving Target
+        </label>
+
+        <div id="saving-options" class="hidden" style="margin-top: 10px;">
+          <div id="saving-mode-options" style="display: flex; gap: 10px;">
+            <label class="radio-btn">
+              <input type="radio" name="saving-mode" value="fixed" checked>
+              Fixed amount
+            </label>
+            <label class="radio-btn">
+              <input type="radio" name="saving-mode" value="percent">
+              Percentage of income
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+            <input type="number" id="saving-value" min="0" step="0.01" placeholder="Saving amount" style="flex: 1;">
+            <span id="saving-symbol">USD</span>
+          </div>
+
+          <button type="button" id="apply-saving" style="margin-top: 10px;">Apply Saving Plan</button>
+        </div>
+      </div>
+
+
+      <!-- Chart -->
+      <div id="chart-container">
+        <canvas id="chart" width="600" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
