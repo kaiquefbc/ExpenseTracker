@@ -73,8 +73,6 @@ enableSaving.addEventListener('change', () => {
   }
 });
 
-
-// Update saving symbol on radio button change
 document.querySelectorAll('input[name="saving-mode"]').forEach(radio => {
   radio.addEventListener('change', () => {
     savingSymbol.textContent = getSavingMode() === 'fixed' ? getCurrencySymbol(currentCurrency) : '%';
